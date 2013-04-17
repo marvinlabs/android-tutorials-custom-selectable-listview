@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<fr.marvinlabs.widget.CheckableRelativeLayout 
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:marvinlabs="http://schemas.android.com/apk/res/fr.marvinlabs.selectablelisttutorial"
+	android:layout_width="fill_parent" 
+	android:layout_height="fill_parent"
+	android:layout_marginRight="10dp"
+	android:paddingTop="5dp"
+	android:paddingBottom="5dp">
+
+	<TextView android:id="@+id/itemId" 
+		android:layout_width="50dp"
+		android:layout_height="fill_parent" 
+		android:layout_alignParentLeft="true" 
+		android:layout_centerVertical="true" 
+		android:layout_marginLeft="5dp"
+		android:textSize="18dp" 
+		android:textStyle="bold|italic"
+		android:textColor="#fccc" 
+		android:focusable="false" />
+
+	<TextView android:id="@+id/itemCaption"
+		android:layout_width="wrap_content" 
+		android:layout_height="fill_parent"
+		android:layout_toRightOf="@id/itemId" 
+		android:layout_centerVertical="true" 
+		android:textSize="13dp"
+		android:textColor="#feee" 
+		android:focusable="false" />	
+
+	<fr.marvinlabs.widget.InertCheckBox android:id="@+id/itemCheckBox"
+		android:layout_width="wrap_content" 
+		android:layout_height="wrap_content"
+		android:layout_marginRight="5dp"
+		android:layout_alignParentRight="true" 
+		android:layout_centerVertical="true" 
+		android:focusable="false" 
+		android:button="@drawable/checkbox" />
+			
+</fr.marvinlabs.widget.CheckableRelativeLayout>
