@@ -18,14 +18,16 @@ import android.widget.RelativeLayout;
  * 
  * @author marvinlabs
  */
-public class CheckableRelativeLayout extends RelativeLayout implements
-		Checkable {
+public class CheckableRelativeLayout extends RelativeLayout implements Checkable {
 
-	private boolean isChecked;
-	private List<Checkable> checkableViews;
+	/**
+	 * Interface definition for a callback to be invoked when the checked state of a CheckableRelativeLayout changed.
+	 */
+	public static interface OnCheckedChangeListener {
+		public void onCheckedChanged(CheckableRelativeLayout layout, boolean isChecked);
+	}
 
-	public CheckableRelativeLayout(Context context, AttributeSet attrs,
-			int defStyle) {
+	public CheckableRelativeLayout(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 		initialise(attrs);
 	}
@@ -55,6 +57,10 @@ public class CheckableRelativeLayout extends RelativeLayout implements
 		for (Checkable c : checkableViews) {
 			c.setChecked(isChecked);
 		}
+
+		if (onCheckedChangeListener != null) {
+			onCheckedChangeListener.onCheckedChanged(this, isChecked);
+		}
 	}
 
 	/*
@@ -65,6 +71,10 @@ public class CheckableRelativeLayout extends RelativeLayout implements
 		for (Checkable c : checkableViews) {
 			c.toggle();
 		}
+	}
+
+	public void setOnCheckedChangeListener(OnCheckedChangeListener onCheckedChangeListener) {
+		this.onCheckedChangeListener = onCheckedChangeListener;
 	}
 
 	@Override
@@ -86,8 +96,7 @@ public class CheckableRelativeLayout extends RelativeLayout implements
 	}
 
 	/**
-	 * Add to our checkable list all the children of the view that implement the
-	 * interface Checkable
+	 * Add to our checkable list all the children of the view that implement the interface Checkable
 	 */
 	private void findCheckableChildren(View v) {
 		if (v instanceof Checkable) {
@@ -102,4 +111,8 @@ public class CheckableRelativeLayout extends RelativeLayout implements
 			}
 		}
 	}
+
+	private boolean isChecked;
+	private List<Checkable> checkableViews;
+	private OnCheckedChangeListener onCheckedChangeListener;
 }

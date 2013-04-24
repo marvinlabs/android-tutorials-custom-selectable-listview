@@ -1,8 +1,6 @@
 package fr.marvinlabs.selectablelisttutorial;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import android.app.ListActivity;
@@ -31,7 +29,7 @@ public class MainActivity extends ListActivity {
 
 		// Create some sample data and sort it alphabetically
 		// --
-		data = new ArrayList<Item>(10);
+		data = new ArrayList<Item>(30);
 		data.add(new Item(10, "France"));
 		data.add(new Item(11, "United Kingdom"));
 		data.add(new Item(12, "Ireland"));
@@ -42,13 +40,28 @@ public class MainActivity extends ListActivity {
 		data.add(new Item(17, "Italy"));
 		data.add(new Item(18, "Denmark"));
 		data.add(new Item(19, "Spain"));
-		data.add(new Item(20, "Portugal"));
-		data.add(new Item(21, "Greece"));
-		Collections.sort(data, new Comparator<Item>() {
-			public int compare(Item i1, Item i2) {
-				return i1.getCaption().compareTo(i2.getCaption());
-			}
-		});
+
+		data.add(new Item(20, "France"));
+		data.add(new Item(21, "United Kingdom"));
+		data.add(new Item(22, "Ireland"));
+		data.add(new Item(23, "Germany"));
+		data.add(new Item(24, "Belgium"));
+		data.add(new Item(25, "Luxembourg"));
+		data.add(new Item(26, "Netherlands"));
+		data.add(new Item(27, "Italy"));
+		data.add(new Item(28, "Denmark"));
+		data.add(new Item(29, "Spain"));
+
+		data.add(new Item(30, "France"));
+		data.add(new Item(31, "United Kingdom"));
+		data.add(new Item(32, "Ireland"));
+		data.add(new Item(33, "Germany"));
+		data.add(new Item(34, "Belgium"));
+		data.add(new Item(35, "Luxembourg"));
+		data.add(new Item(36, "Netherlands"));
+		data.add(new Item(37, "Italy"));
+		data.add(new Item(38, "Denmark"));
+		data.add(new Item(39, "Spain"));
 
 		// Create the adapter to render our data
 		// --
@@ -66,15 +79,15 @@ public class MainActivity extends ListActivity {
 	 */
 	public void onButtonClick(View v) {
 		switch (v.getId()) {
-		case R.id.viewCheckedIdsButton:
-			showSelectedItemIds();
-			break;
-		case R.id.viewCheckedItemsButton:
-			showSelectedItems();
-			break;
-		case R.id.toggleChoiceModeButton:
-			toggleChoiceMode();
-			break;
+			case R.id.viewCheckedIdsButton:
+				showSelectedItemIds();
+				break;
+			case R.id.viewCheckedItemsButton:
+				showSelectedItems();
+				break;
+			case R.id.toggleChoiceModeButton:
+				toggleChoiceMode();
+				break;
 		}
 	}
 
@@ -86,21 +99,18 @@ public class MainActivity extends ListActivity {
 
 		final int currentMode = listView.getChoiceMode();
 		switch (currentMode) {
-		case ListView.CHOICE_MODE_NONE:
-			listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-			Toast.makeText(this, "List choice mode: SINGLE", Toast.LENGTH_SHORT)
-					.show();
-			break;
-		case ListView.CHOICE_MODE_SINGLE:
-			listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-			Toast.makeText(this, "List choice mode: MULTIPLE",
-					Toast.LENGTH_SHORT).show();
-			break;
-		case ListView.CHOICE_MODE_MULTIPLE:
-			listView.setChoiceMode(ListView.CHOICE_MODE_NONE);
-			Toast.makeText(this, "List choice mode: NONE", Toast.LENGTH_SHORT)
-					.show();
-			break;
+			case ListView.CHOICE_MODE_NONE:
+				listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+				Toast.makeText(this, "List choice mode: SINGLE", Toast.LENGTH_SHORT).show();
+				break;
+			case ListView.CHOICE_MODE_SINGLE:
+				listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+				Toast.makeText(this, "List choice mode: MULTIPLE", Toast.LENGTH_SHORT).show();
+				break;
+			case ListView.CHOICE_MODE_MULTIPLE:
+				listView.setChoiceMode(ListView.CHOICE_MODE_NONE);
+				Toast.makeText(this, "List choice mode: NONE", Toast.LENGTH_SHORT).show();
+				break;
 		}
 	}
 
@@ -113,11 +123,9 @@ public class MainActivity extends ListActivity {
 		// Get an array that tells us for each position whether the item is
 		// checked or not
 		// --
-		final SparseBooleanArray checkedItems = listView
-				.getCheckedItemPositions();
+		final SparseBooleanArray checkedItems = listView.getCheckedItemPositions();
 		if (checkedItems == null) {
-			Toast.makeText(this, "No selection info available",
-					Toast.LENGTH_LONG).show();
+			Toast.makeText(this, "No selection info available", Toast.LENGTH_LONG).show();
 			return;
 		}
 
@@ -149,9 +157,8 @@ public class MainActivity extends ListActivity {
 	}
 
 	/**
-	 * Show a message giving the selected item IDs. There seems to be a bug with
-	 * ListView#getCheckItemIds() on Android 1.6 at least @see
-	 * http://code.google.com/p/android/issues/detail?id=6609
+	 * Show a message giving the selected item IDs. There seems to be a bug with ListView#getCheckItemIds() on Android
+	 * 1.6 at least @see http://code.google.com/p/android/issues/detail?id=6609
 	 */
 	private void showSelectedItemIds() {
 		final StringBuffer sb = new StringBuffer("Selection: ");
